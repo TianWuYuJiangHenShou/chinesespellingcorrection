@@ -1,0 +1,34 @@
+name: "plome_preprocess"
+backend: "python"
+max_batch_size: 16
+input [
+  {
+    name: "RAW_TEXT"
+    data_type: TYPE_STRING
+    dims: [ -1 ]
+  }
+]
+output [
+  {
+    name: "INPUT_IDS"
+    data_type: TYPE_INT64
+    dims: [ 180 ]
+  },
+  {
+    name: "INPUT_MASKS"
+    data_type: TYPE_INT64
+    dims: [ 180 ]
+  },
+  {
+    name: "SEGMENT_IDS"
+    data_type: TYPE_INT64
+    dims: [ 180 ]
+  },
+  {
+      name: "STROKE_IDS"
+      data_type: TYPE_INT64
+      dims: [ 180 ]
+    }
+]
+
+instance_group [{ kind: KIND_CPU }]

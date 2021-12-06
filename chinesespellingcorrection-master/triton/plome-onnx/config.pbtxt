@@ -1,0 +1,48 @@
+name: "plome-onnx"
+platform: "onnxruntime_onnx"
+max_batch_size: 16
+input [
+{
+    name: "input_ids"
+    data_type: TYPE_INT64
+    dims: [180]
+},
+{
+    name: "input_mask"
+    data_type: TYPE_INT64
+    dims: [180]
+},
+{
+    name: "segment_ids"
+    data_type: TYPE_INT64
+    dims: [180]
+},
+{
+    name: "stroke_ids"
+    data_type: TYPE_INT64
+    dims: [180]
+}
+]
+output [
+{
+    name: "gold_masks"
+    data_type: TYPE_INT64
+    dims: [180]
+},
+{
+    name: "fusion_probs"
+    data_type: TYPE_FP32
+    dims: [180,21128]
+}
+]
+optimization {
+  cuda {
+    graphs: 0
+  }
+}
+instance_group [
+    {
+        count: 1
+        kind: KIND_GPU
+    }
+]
